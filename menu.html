@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sindhri Restaurant - Menu</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu_style.css">
+</head>
+
+<body>
+    <div id="globalLoader">
+        <div class="loader-spinner"></div>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html#home">
+                <img src="logo.png" alt="Sindhri Logo" height="60" class="me-2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-close-icon">&times;</span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-4">
+                    <li class="nav-item"><a class="nav-link fw-medium" href="index.html#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium active" href="menu.html">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="index.html#reservation">Reservation</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="index.html#contact">Contact</a></li>
+                </ul>
+                <!-- <div class="d-flex gap-2">
+                    <button class="btn btn-danger" id="authBtn">Sign In</button>
+                </div> -->
+            </div>
+        </div>
+    </nav>
+
+    <section class="custom-hero-slider">
+        <div class="slider-container" id="heroSlider">
+
+            <div class="slide active">
+                <img src="slider1.jpg" alt="Veg Karahi" />
+            </div>
+            <div class="slide">
+                <img src="slider.jpg" alt="Broccoli Cheddar Soup" />
+            </div>
+            <div class="slide">
+                <img src="slider2.jpg" alt="Breakfast" />
+            </div>
+            <!-- <div class="slide">
+                <img src="slider3.jpg" alt="Burgers & Sandwiches" />
+            </div> -->
+
+            <!-- Controls -->
+            <!-- <button class="slider-btn prev" id="prevSlide">&#10094;</button>
+            <button class="slider-btn next" id="nextSlide">&#10095;</button> -->
+        </div>
+    </section>
+    <!-- Category Navigation -->
+    <section class="category-nav-section">
+        <div class="container">
+            <nav class="category-nav" id="categoryNav">
+                <a href="#" class="category-btn active" data-category="all">
+                    <i class="fas fa-utensils"></i>
+                    <span>All</span>
+                </a>
+                <a href="#" class="category-btn" data-category="chinese">
+                    <i class="fas fa-bowl-rice"></i>
+                    <span>Chinese</span>
+                </a>
+                <a href="#" class="category-btn" data-category="seafood">
+                    <i class="fas fa-fish"></i>
+                    <span>Sea Food</span>
+                </a>
+                <a href="#" class="category-btn" data-category="karahi">
+                    <i class="fas fa-fire"></i>
+                    <span>Karahi</span>
+                </a>
+                <a href="#" class="category-btn" data-category="vegetarian">
+                    <i class="fas fa-leaf"></i>
+                    <span>Vegetarian</span>
+                </a>
+                <a href="#" class="category-btn" data-category="sindhri-rice">
+                    <i class="fas fa-bowl-food"></i>
+                    <span>Sindhri Rice</span>
+                </a>
+                <a href="#" class="category-btn" data-category="burger">
+                    <i class="fas fa-hamburger"></i>
+                    <span>Burger</span>
+                </a>
+                <a href="#" class="category-btn" data-category="dessert">
+                    <i class="fas fa-ice-cream"></i>
+                    <span>Dessert</span>
+                </a>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Authentication Modal -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content auth-modal">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4 pb-4">
+                    <!-- Sign In Form -->
+                    <div id="signInForm" class="auth-form">
+                        <div class="text-center mb-4">
+                            <h3 class="fw-bold text-white mb-2">Welcome Back</h3>
+                            <p class="text-light">Sign in to your account</p>
+                        </div>
+
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label text-light">Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-transparent border-end-0">
+                                        <i class="fas fa-envelope text-light"></i>
+                                    </span>
+                                    <input type="email" class="form-control border-start-0" id="loginEmail" required>
+                                </div>
+                                <div class="invalid-feedback" id="loginEmailError"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label text-light">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-transparent border-end-0">
+                                        <i class="fas fa-lock text-light"></i>
+                                    </span>
+                                    <input type="password" class="form-control border-start-0" id="loginPassword"
+                                        required>
+                                    <button class="btn btn-outline-light border-start-0" type="button"
+                                        id="toggleLoginPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="invalid-feedback" id="loginPasswordError"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rememberMe">
+                                    <label class="form-check-label text-light" for="rememberMe">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <a href="#" class="text-danger text-decoration-none">Forgot password?</a>
+                            </div>
+
+                            <button type="submit" class="btn btn-danger w-100 mb-3" id="loginBtn">
+                                <span class="btn-text">Sign In</span>
+                                <span class="btn-loading d-none">
+                                    <span class="spinner-border spinner-border-sm me-2"></span>
+                                    Signing in...
+                                </span>
+                            </button>
+                        </form>
+
+                        <div class="text-center mb-3">
+                            <span class="text-light">Or continue with</span>
+                        </div>
+
+                        <div class="d-flex gap-2 mb-3">
+                            <button class="btn btn-outline-light flex-fill" id="googleLoginBtn">
+                                <i class="fab fa-google me-2"></i>Google
+                            </button>
+                            <button class="btn btn-outline-light flex-fill" id="facebookLoginBtn">
+                                <i class="fab fa-facebook-f me-2"></i>Facebook
+                            </button>
+                        </div>
+
+                        <div class="text-center">
+                            <span class="text-light">Don't have an account?</span>
+                            <a href="#" class="text-danger text-decoration-none ms-1" id="showSignUp">Sign up</a>
+                        </div>
+                    </div>
+
+                    <!-- Sign Up Form -->
+                    <div id="signUpForm" class="auth-form d-none">
+                        <div class="text-center mb-4">
+                            <h3 class="fw-bold text-white mb-2">Create Account</h3>
+                            <p class="text-light">Join us for the best dining experience</p>
+                        </div>
+
+                        <form id="registerForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="registerFirstName" class="form-label text-light">First Name</label>
+                                    <input type="text" class="form-control" id="registerFirstName" required>
+                                    <div class="invalid-feedback" id="registerFirstNameError"></div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="registerLastName" class="form-label text-light">Last Name</label>
+                                    <input type="text" class="form-control" id="registerLastName" required>
+                                    <div class="invalid-feedback" id="registerLastNameError"></div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label text-light">Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-transparent border-end-0">
+                                        <i class="fas fa-envelope text-light"></i>
+                                    </span>
+                                    <input type="email" class="form-control border-start-0" id="registerEmail" required>
+                                </div>
+                                <div class="invalid-feedback" id="registerEmailError"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="registerPhone" class="form-label text-light">Phone Number</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-transparent border-end-0">
+                                        <i class="fas fa-phone text-light"></i>
+                                    </span>
+                                    <input type="tel" class="form-control border-start-0" id="registerPhone" required>
+                                </div>
+                                <div class="invalid-feedback" id="registerPhoneError"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label text-light">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-transparent border-end-0">
+                                        <i class="fas fa-lock text-light"></i>
+                                    </span>
+                                    <input type="password" class="form-control border-start-0" id="registerPassword"
+                                        required>
+                                    <button class="btn btn-outline-light border-start-0" type="button"
+                                        id="toggleRegisterPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="invalid-feedback" id="registerPasswordError"></div>
+                                <div class="password-strength mt-2" id="passwordStrength"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label text-light">Confirm Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-transparent border-end-0">
+                                        <i class="fas fa-lock text-light"></i>
+                                    </span>
+                                    <input type="password" class="form-control border-start-0" id="confirmPassword"
+                                        required>
+                                    <button class="btn btn-outline-light border-start-0" type="button"
+                                        id="toggleConfirmPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="invalid-feedback" id="confirmPasswordError"></div>
+                            </div>
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                                <label class="form-check-label text-light" for="agreeTerms">
+                                    I agree to the <a href="#" class="text-danger">Terms of Service</a> and <a href="#"
+                                        class="text-danger">Privacy Policy</a>
+                                </label>
+                                <div class="invalid-feedback" id="agreeTermsError"></div>
+                            </div>
+
+                            <button type="submit" class="btn btn-danger w-100 mb-3" id="registerBtn">
+                                <span class="btn-text">Create Account</span>
+                                <span class="btn-loading d-none">
+                                    <span class="spinner-border spinner-border-sm me-2"></span>
+                                    Creating account...
+                                </span>
+                            </button>
+                        </form>
+
+                        <div class="text-center mb-3">
+                            <span class="text-light">Or continue with</span>
+                        </div>
+
+                        <div class="d-flex gap-2 mb-3">
+                            <button class="btn btn-outline-light flex-fill" id="googleSignUpBtn">
+                                <i class="fab fa-google me-2"></i>Google
+                            </button>
+                            <button class="btn btn-outline-light flex-fill" id="facebookSignUpBtn">
+                                <i class="fab fa-facebook-f me-2"></i>Facebook
+                            </button>
+                        </div>
+
+                        <div class="text-center">
+                            <span class="text-light">Already have an account?</span>
+                            <a href="#" class="text-danger text-decoration-none ms-1" id="showSignIn">Sign in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Profile Dropdown (Hidden by default) -->
+    <div class="user-profile-dropdown d-none" id="userProfileDropdown">
+        <div class="dropdown-menu show">
+            <div class="dropdown-header">
+                <div class="d-flex align-items-center">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0 text-white" id="userName">User Name</h6>
+                        <small class="text-light" id="userEmail">user@example.com</small>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" id="profileLink">
+                <i class="fas fa-user-circle me-2"></i>Profile
+            </a>
+            <a class="dropdown-item" href="#" id="reservationsLink">
+                <i class="fas fa-calendar-alt me-2"></i>My Reservations
+            </a>
+            <a class="dropdown-item" href="#" id="ordersLink">
+                <i class="fas fa-utensils me-2"></i>Order History
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="#" id="logoutBtn">
+                <i class="fas fa-sign-out-alt me-2"></i>Sign Out
+            </a>
+        </div>
+    </div>
+
+    <!-- Add to Cart Modal -->
+    <div id="cartModal" class="cart-modal-overlay" style="display:none;">
+        <div class="cart-modal">
+            <button class="cart-modal-close" id="cartModalClose">&times;</button>
+            <div class="cart-modal-content">
+                <div class="cart-modal-img">
+                    <img id="cartModalImg" src="" alt="Item Image">
+                </div>
+                <div class="cart-modal-details">
+                    <h2 id="cartModalTitle"></h2>
+                    <p id="cartModalDesc"></p>
+                    <div class="cart-modal-price" id="cartModalPrice">Rs 299</div>
+                    <div class="cart-modal-options">
+                        <label>How Many?</label>
+                        <div class="cart-qty">
+                            <button id="qtyMinus">-</button>
+                            <span id="cartQty">1</span>
+                            <button id="qtyPlus">+</button>
+                        </div>
+                        <label>Order Type</label>
+                        <div class="order-type-options">
+                            <input type="radio" name="orderType" id="delivery" value="Delivery" checked>
+                            <label for="delivery">Delivery</label>
+
+                            <input type="radio" name="orderType" id="pickup" value="Pickup">
+                            <label for="pickup">Pickup</label>
+                        </div>
+
+
+                    </div>
+                    <button class="cart-modal-confirm" id="cartModalConfirm">Confirm Order</button>
+                    <div class="cart-modal-success" id="cartModalSuccess" style="display:none;">
+                        <i class="fas fa-check-circle"></i> Order placed successfully!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="menu-main-content">
+
+
+        <!-- Menu Items Section -->
+        <section class="menu-items-section">
+            <div class="container">
+                <!-- All Items Category -->
+                <div class="menu-category" id="all-section" data-category="all">
+                    <div class="category-header" data-aos="fade-up">
+                        <h2 class="category-title">All Menu Items</h2>
+                        <p class="category-description">Explore our complete menu with authentic flavors</p>
+                    </div>
+                    <div class="menu-grid">
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="item-image-container">
+                                <img src="biryani2.jpg" alt="Chicken Biryani" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Chicken Biryani</h3>
+                                <p class="item-description">Aromatic basmati rice with tender chicken and spices</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 299</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="item-image-container">
+                                <img src="brocali soup.jpg" alt="Broccoli Cheddar Soup" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Broccoli Cheddar Soup</h3>
+                                <p class="item-description">Creamy soup with fresh broccoli and cheddar cheese</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 199</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="item-image-container">
+                                <img src="./Breakfast.png" alt="Breakfast Platter" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Breakfast Platter</h3>
+                                <p class="item-description">Complete breakfast with eggs, toast, and fresh fruits</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 249</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="item-image-container">
+                                <img src="classic.jpg" alt="Burger & Sandwich" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Classic Burger</h3>
+                                <p class="item-description">Juicy beef burger with fresh vegetables and cheese</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 179</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="500">
+                            <div class="item-image-container">
+                                <img src="veg biryani.jpg" alt="Paneer Biryani" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Paneer Biryani</h3>
+                                <p class="item-description">Delicious biryani with soft paneer cubes and spices</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 279</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="600">
+                            <div class="item-image-container">
+                                <img src="veg soup.jpg" alt="Veg Soup" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Veg Soup</h3>
+                                <p class="item-description">Healthy soup with mixed vegetables and herbs</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 159</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chinese Dishes Category -->
+                <div class="menu-category" id="chinese-section" data-category="chinese">
+                    <div class="category-header" data-aos="fade-up">
+                        <h2 class="category-title">Chinese Dishes</h2>
+                        <p class="category-description">Authentic Chinese cuisine with traditional flavors</p>
+                    </div>
+                    <div class="menu-grid">
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="item-image-container">
+                                <img src="fried rice.jpg" alt="Chicken Fried Rice" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Chicken Fried Rice</h3>
+                                <p class="item-description">Wok-fried rice with chicken, vegetables, and soy sauce</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 229</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="item-image-container">
+                                <img src="chowmein.jpg" alt="Chow Mein" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Chow Mein</h3>
+                                <p class="item-description">Stir-fried noodles with vegetables and chicken</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 259</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="item-image-container">
+                                <img src="egg fried rice.jpg" alt="Egg Fried Rice" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Egg Fried Rice</h3>
+                                <p class="item-description">Classic fried rice with scrambled eggs and veggies</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 199</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="item-image-container">
+                                <img src="veg noodles.jpg" alt="Veg Noodles" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Veg Noodles</h3>
+                                <p class="item-description">Noodles tossed with fresh vegetables and sauces</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 179</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="500">
+                            <div class="item-image-container">
+                                <img src="schezwan rice.jpg" alt="Schezwan Rice" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Schezwan Rice</h3>
+                                <p class="item-description">Spicy rice with Schezwan sauce and veggies</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 239</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="600">
+                            <div class="item-image-container">
+                                <img src="veg Manchurian.jpg" alt="Manchurian" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Veg Manchurian</h3>
+                                <p class="item-description">Fried veggie balls in spicy Manchurian sauce</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 209</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sea Food Category -->
+                <div class="menu-category" id="seafood-section" data-category="seafood">
+                    <div class="category-header" data-aos="fade-up">
+                        <h2 class="category-title">Sea Food</h2>
+                        <p class="category-description">Fresh seafood prepared with authentic recipes</p>
+                    </div>
+                    <div class="menu-grid">
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="item-image-container">
+                                <img src="fish curry.jpg" alt="Fish Curry" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Fish Curry</h3>
+                                <p class="item-description">Fresh fish in aromatic curry with coconut milk</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 399</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="item-image-container">
+                                <img src="prawn biryani.jpg" alt="Prawn Biryani" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Prawn Biryani</h3>
+                                <p class="item-description">Aromatic rice with fresh prawns and spices</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 449</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="item-image-container">
+                                <img src="fish fry.jpg" alt="Fish Fry" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Fish Fry</h3>
+                                <p class="item-description">Crispy fried fish with tangy dip</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 359</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="item-image-container">
+                                <img src="shrimp tempura.jpg" alt="Shrimp Tempura" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Shrimp Tempura</h3>
+                                <p class="item-description">Crispy battered shrimp with sauce</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 379</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="500">
+                            <div class="item-image-container">
+                                <img src="fish biryani.jpg" alt="Fish Biryani" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Fish Biryani</h3>
+                                <p class="item-description">Biryani rice with marinated fish pieces</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 429</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="600">
+                            <div class="item-image-container">
+                                <img src="seafood soup.jpg" alt="Seafood Soup" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Seafood Soup</h3>
+                                <p class="item-description">Soup with prawns, fish, and crab</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 299</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Karahi Category -->
+                <div class="menu-category" id="karahi-section" data-category="karahi">
+                    <div class="category-header" data-aos="fade-up">
+                        <h2 class="category-title">Karahi</h2>
+                        <p class="category-description">Traditional karahi dishes cooked to perfection</p>
+                    </div>
+                    <div class="menu-grid">
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="item-image-container">
+                                <img src="karahi2.jpg" alt="Chicken Karahi" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Chicken Karahi</h3>
+                                <p class="item-description">Spicy chicken karahi with tomatoes and ginger</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 599</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="item-image-container">
+                                <img src="mutton karahi.jpg" alt="Mutton Karahi" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Mutton Karahi</h3>
+                                <p class="item-description">Tender mutton karahi with rich spices</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 699</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="item-image-container">
+                                <img src="paneer karahi.jpg" alt="Paneer Karahi" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Paneer Karahi</h3>
+                                <p class="item-description">Paneer cooked in spicy tomato gravy</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 399</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="item-image-container">
+                                <img src="beef karahi.jpg" alt="Beef Karahi" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Beef Karahi</h3>
+                                <p class="item-description">Traditional beef karahi with spices</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 499</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="500">
+                            <div class="item-image-container">
+                                <img src="veg karahi.jpg" alt="Mix Veg Karahi" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Mix Veg Karahi</h3>
+                                <p class="item-description">Mixed vegetables cooked in karahi style</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 299</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="600">
+                            <div class="item-image-container">
+                                <img src="white karahi.jpg" alt="Chicken White Karahi" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Chicken White Karahi</h3>
+                                <p class="item-description">Creamy white karahi with chicken</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 349</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vegetarian Category -->
+                <div class="menu-category" id="vegetarian-section" data-category="vegetarian">
+                    <div class="category-header" data-aos="fade-up">
+                        <h2 class="category-title">Vegetarian</h2>
+                        <p class="category-description">Fresh and flavorful vegetarian options</p>
+                    </div>
+                    <div class="menu-grid">
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="item-image-container">
+                                <img src="veg curry.jpg" alt="Mixed Vegetable Curry" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Mixed Vegetable Curry</h3>
+                                <p class="item-description">Assorted vegetables in aromatic curry sauce</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 199</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="item-image-container">
+                                <img src="veg biryani2.jpg" alt="Vegetable Biryani" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Vegetable Biryani</h3>
+                                <p class="item-description">Aromatic rice with fresh vegetables and spices</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 249</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="item-image-container">
+                                <img src="paneer butter masalaa.jpg" alt="Paneer Butter Masala" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Paneer Butter Masala</h3>
+                                <p class="item-description">Paneer cubes in creamy tomato gravy</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 299</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="item-image-container">
+                                <img src="veg sandwich.jpg" alt="Veg Sandwich" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Veg Sandwich</h3>
+                                <p class="item-description">Sandwich with fresh veggies and cheese</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 149</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="500">
+                            <div class="item-image-container">
+                                <img src="dal tadka.jpg" alt="Dal Tadka" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Dal Tadka</h3>
+                                <p class="item-description">Yellow lentils tempered with spices</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 129</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="600">
+                            <div class="item-image-container">
+                                <img src="veg soup 2.jpg" alt="Veg Soup" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Veg Soup</h3>
+                                <p class="item-description">Healthy soup with mixed vegetables and herbs</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 99</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sindhri Rice Category -->
+                <div class="menu-category" id="sindhri-rice-section" data-category="sindhri-rice">
+                    <div class="category-header" data-aos="fade-up">
+                        <h2 class="category-title">Sindhri Rice</h2>
+                        <p class="category-description">Special rice dishes from Sindhri tradition</p>
+                    </div>
+                    <div class="menu-grid">
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="item-image-container">
+                                <img src="special biryani.jpg" alt="Sindhri Special Biryani" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Sindhri Special Biryani</h3>
+                                <p class="item-description">Traditional Sindhri style biryani with special spices</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 349</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="item-image-container">
+                                <img src="pulao.jpg" alt="Sindhri Pulao" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Sindhri Pulao</h3>
+                                <p class="item-description">Fragrant rice pulao with nuts and dried fruits</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 279</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="item-image-container">
+                                <img src="jeera rice.jpg" alt="Jeera Rice" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Jeera Rice</h3>
+                                <p class="item-description">Basmati rice flavored with cumin seeds</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 149</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="item-image-container">
+                                <img src="veg pulao.jpg" alt="Veg Pulao" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Veg Pulao</h3>
+                                <p class="item-description">Rice cooked with vegetables and mild spices</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 199</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="500">
+                            <div class="item-image-container">
+                                <img src="peas pulao.jpg" alt="Peas Pulao" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Peas Pulao</h3>
+                                <p class="item-description">Rice cooked with green peas and spices</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 159</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="600">
+                            <div class="item-image-container">
+                                <img src="tomato rice.jpg" alt="Tomato Rice" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Tomato Rice</h3>
+                                <p class="item-description">Rice cooked with tomatoes and spices</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 139</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Burger Category -->
+                <div class="menu-category" id="burger-section" data-category="burger">
+                    <div class="category-header" data-aos="fade-up">
+                        <h2 class="category-title">Burger</h2>
+                        <p class="category-description">Delicious burgers with fresh ingredients</p>
+                    </div>
+                    <div class="menu-grid">
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="item-image-container">
+                                <img src="burger2.jpg" alt="Classic Beef Burger" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Classic Beef Burger</h3>
+                                <p class="item-description">Juicy beef patty with fresh vegetables and cheese</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 179</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="item-image-container">
+                                <img src="classic.jpg" alt="Chicken Burger" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Chicken Burger</h3>
+                                <p class="item-description">Grilled chicken patty with lettuce and mayo</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 159</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="item-image-container">
+                                <img src="egg burger.jpg" alt="Egg Burger" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Egg Burger</h3>
+                                <p class="item-description">Burger with fried egg and cheese</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 139</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="item-image-container">
+                                <img src="vaggie burger.jpg" alt="Veggie Burger" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Veggie Burger</h3>
+                                <p class="item-description">Burger with mixed vegetable patty</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 129</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="500">
+                            <div class="item-image-container">
+                                <img src="paneer burger.jpg" alt="Paneer Burger" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Paneer Burger</h3>
+                                <p class="item-description">Burger with paneer patty and veggies</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 149</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="600">
+                            <div class="item-image-container">
+                                <img src="spicy burger.jpg" alt="Spicy Burger" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Spicy Burger</h3>
+                                <p class="item-description">Burger with spicy sauce and jalapenos</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 169</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dessert Category -->
+                <div class="menu-category" id="dessert-section" data-category="dessert">
+                    <div class="category-header" data-aos="fade-up">
+                        <h2 class="category-title">Dessert</h2>
+                        <p class="category-description">Sweet endings to your perfect meal</p>
+                    </div>
+                    <div class="menu-grid">
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="item-image-container">
+                                <img src="gulab jamun.jpg" alt="Gulab Jamun" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Gulab Jamun</h3>
+                                <p class="item-description">Sweet milk dumplings in sugar syrup</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 99</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="item-image-container">
+                                <img src="ras malai.jpg" alt="Rasmalai" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Rasmalai</h3>
+                                <p class="item-description">Soft cottage cheese patties in sweetened milk</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 129</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="item-image-container">
+                                <img src="kheer.jpg" alt="Kheer" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Kheer</h3>
+                                <p class="item-description">Traditional rice pudding with nuts</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 89</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="item-image-container">
+                                <img src="cake.jpg" alt="Chocolate Cake" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Chocolate Cake</h3>
+                                <p class="item-description">Rich chocolate cake with ganache</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 149</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="500">
+                            <div class="item-image-container">
+                                <img src="custurd.jpg" alt="Fruit Custard" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Fruit Custard</h3>
+                                <p class="item-description">Custard with fresh seasonal fruits</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 119</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="600">
+                            <div class="item-image-container">
+                                <img src="ice cream.jpg" alt="Ice Cream" class="item-image">
+                                <div class="item-overlay">
+                                    <button class="expand-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">Ice Cream</h3>
+                                <p class="item-description">Assorted flavors of ice cream</p>
+                                <div class="item-footer">
+                                    <span class="item-price">Rs 79</span>
+                                    <button class="add-to-cart-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Restaurant Logo" class="footer-logo">
+                <span class="footer-name">Sindhri</span>
+            </div>
+            <nav class="footer-nav" aria-label="Footer Navigation">
+                <a href="index.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="#reservation">Reservation</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="footer-social">
+                <a href="#" aria-label="Instagram" class="footer-social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook" class="footer-social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter" class="footer-social-icon"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2025 Sindh Restaurant. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- <script src="script.js"></script> -->
+
+    <!-- Custom JS -->
+    <script src="menu_script.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+
+
+</body>
+
+</html>
