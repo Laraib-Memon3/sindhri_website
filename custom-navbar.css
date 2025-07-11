@@ -1,0 +1,233 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.custom-navbar {
+    background: #090909 !important;
+    border-bottom: 1.5px solid #FFD700;
+    font-family: 'Poppins', sans-serif;
+    z-index: 1000;
+}
+
+.navbar-brand img {
+    filter: drop-shadow(0 0 2px #FFD700);
+}
+
+.navbar-nav .nav-link {
+    color: #fff !important;
+    margin: 0 0.6rem;
+    position: relative;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+    padding: 0.5rem 0.8rem;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover {
+    color: #FFD700 !important;
+}
+
+.navbar-nav .nav-link::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #FFD700;
+    transition: width 0.3s;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.navbar-nav .nav-link.active::after,
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
+
+.btn-gold {
+    background: #FFD700;
+    color: #090909;
+    border: none;
+    font-weight: 600;
+    border-radius: 20px;
+    padding: 6px 22px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-gold:hover {
+    background: #fff3cd;
+    color: #090909;
+}
+
+.btn-outline-gold {
+    background: transparent;
+    color: #FFD700;
+    border: 1.5px solid #FFD700;
+    font-weight: 600;
+    border-radius: 20px;
+    padding: 6px 22px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-outline-gold:hover {
+    background: #FFD700;
+    color: #090909;
+}
+
+/* Remove cart icon and badge styles */
+.cart-icon,
+.cart-badge {
+    display: none !important;
+}
+
+.navbar-toggler .close-icon {
+    font-size: 2rem;
+    color: #FFD700;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.navbar-toggler .navbar-toggler-icon {
+    transition: opacity 0.2s;
+}
+
+/* Modern user icon (auth link) design */
+.nav-auth-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: transparent;
+    color: #FFD700 !important;
+    font-size: 1.35rem;
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
+    box-shadow: none;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.18s, color 0.2s;
+    position: relative;
+}
+
+.nav-auth-link:hover,
+.nav-auth-link:focus {
+    background: rgba(255, 215, 0, 0.12);
+    color: #FFD700 !important;
+    box-shadow: 0 2px 12px 0 rgba(255, 215, 0, 0.12);
+    transform: scale(1.12);
+    text-decoration: none;
+}
+
+.nav-auth-link i {
+    font-size: 1.35rem;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+.d-flex.align-items-center.order-lg-2 {
+    margin-left: auto;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        background: #090909;
+        border-radius: 0 0 10px 10px;
+        padding: 1rem 0;
+        text-align: center;
+    }
+
+    .navbar-nav .nav-link {
+        margin: 0.5rem 0;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .d-none.d-lg-flex {
+        display: none !important;
+    }
+
+    .d-lg-none {
+        display: inline-block !important;
+    }
+
+    .nav-auth-link {
+        width: 2.2rem;
+        height: 2.2rem;
+        margin: 0.5rem auto 0.5rem auto;
+        font-size: 1.2rem;
+        border-radius: 50%;
+        padding: 0;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .navbar-brand img {
+        width: 40px;
+        height: 34px;
+    }
+
+    .btn-gold,
+    .btn-outline-gold {
+        padding: 4px 12px;
+        font-size: 0.95rem;
+    }
+}
+
+.close-icon {
+    font-size: 2rem;
+    color: #FFD700;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    /* So only the button is clickable */
+    transition: opacity 0.2s;
+}
+
+.navbar-toggler {
+    position: relative;
+}
+
+/* Hide the hamburger icon background when d-none is applied */
+.navbar-toggler-icon.d-none {
+    background-image: none !important;
+}
+
+.navbar-toggler {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-toggler-icon {
+    z-index: 1;
+    transition: opacity 0.2s;
+}
+
+.navbar-toggler-icon.d-none {
+    background-image: none !important;
+    opacity: 0 !important;
+}
+
+.close-icon {
+    z-index: 2;
+    font-size: 2rem;
+    color: #FFD700;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: opacity 0.2s;
+    opacity: 1;
+}
