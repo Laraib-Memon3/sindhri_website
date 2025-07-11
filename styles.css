@@ -886,7 +886,7 @@ body {
 .hero-section {
     position: relative;
     min-height: 100vh;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.7) 100%), url('main.jpg') center center/cover no-repeat;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.7) 100%), url('image/main.jpg') center center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
